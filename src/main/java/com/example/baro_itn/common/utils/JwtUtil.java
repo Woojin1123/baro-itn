@@ -36,19 +36,20 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public String createToken(String username, List<UserRole> userRoles, String nickname) {
+    public String createToken(Long userId, String username, List<UserRole> userRoles, String nickname) {
         Date date = new Date();
 
         List<String> roles = userRoles.stream().map(Enum::name).toList();
 
         return Jwts.builder()
-                        .setSubject(username)
-                        .claim("nickname", nickname)
-                        .claim("roles", roles)
-                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
-                        .setIssuedAt(date) // 발급일
-                        .signWith(key, signatureAlgorithm) // 암호화 알고리즘
-                        .compact();
+                .setSubject(userId.toString())
+                .claim("username", username)
+                .claim("nickname", nickname)
+                .claim("roles", roles)
+                .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                .setIssuedAt(date) // 발급일
+                .signWith(key, signatureAlgorithm) // 암호화 알고리즘
+                .compact();
     }
 
     public String substringToken(String tokenValue) {

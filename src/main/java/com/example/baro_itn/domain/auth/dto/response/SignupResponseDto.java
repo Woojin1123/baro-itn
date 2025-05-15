@@ -10,12 +10,14 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class SignupResponseDto {
+    private Long userId;
     private String username;
     private String nickname;
     private List<UserRole> role;
 
     public static SignupResponseDto from(User user) {
         return new SignupResponseDto(
+                user.getId(),
                 user.getUsername(),
                 user.getNickname(),
                 user.getRoles()

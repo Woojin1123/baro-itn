@@ -16,7 +16,7 @@ public class User {
     private String nickname;
     private List<UserRole> roles;
 
-    public User(String username, String password, String nickname) {
+    public User(Long id, String username, String password, String nickname) {
         this.id = id;
         this.username = username;
         this.password = password;

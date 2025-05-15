@@ -28,6 +28,7 @@ public class AuthService {
         }
 
         String token = jwtUtil.createToken(
+                user.getId(),
                 user.getUsername(),
                 user.getRoles(),
                 user.getNickname());
@@ -37,15 +38,16 @@ public class AuthService {
 
     public SignupResponseDto signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
+
         if (userRepository.isExists(username)) {
             throw new ApiException(ErrorCode.USER_ALREADY_EXISTS);
         }
-        User user = new User(
+
+        User saveUser = userRepository.save(
                 signupRequestDto.getUsername(),
                 passwordEncoder.encode(signupRequestDto.getPassword()),
                 signupRequestDto.getNickname());
-        userRepository.save(user);
 
-        return SignupResponseDto.from(user);
+        return SignupResponseDto.from(saveUser);
     }
 }
