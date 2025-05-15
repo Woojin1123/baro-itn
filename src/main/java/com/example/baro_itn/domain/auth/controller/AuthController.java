@@ -33,8 +33,8 @@ public class AuthController {
                     schema = @Schema(implementation = LoginRequestDto.class),
                     examples = @ExampleObject(value = """
                             {
-                              "username": "김우진",
-                              "password": "password"
+                              "username": "admin",
+                              "password": "admin"
                             }
                             """)
             )
