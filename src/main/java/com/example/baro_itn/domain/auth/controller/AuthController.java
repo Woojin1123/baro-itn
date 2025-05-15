@@ -57,7 +57,7 @@ public class AuthController {
 
     @Operation(
             summary = "회원 가입",
-            description = "회원 가입 API (ADMIN 권한 필요)",
+            description = "회원 가입 API",
             security = @SecurityRequirement(name = "bearerAuth")  // JWT 인증 필요
     )
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
