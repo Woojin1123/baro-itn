@@ -39,11 +39,14 @@ public class UserRepository {
     }
 
     public User findByUserId(Long userId) {
+        if (!userIdToName.containsKey(userId)) {
+            throw new ApiException(ErrorCode.USER_NOT_FOUND);
+        }
         return users.get(userIdToName.get(userId));
     }
 
     public User findByUsername(String username) {
-        if(!isExists(username)){
+        if (!isExists(username)) {
             throw new ApiException(ErrorCode.USER_NOT_FOUND);
         }
         return users.get(username);
