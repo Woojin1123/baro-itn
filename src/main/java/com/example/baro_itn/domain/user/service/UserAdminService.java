@@ -22,7 +22,7 @@ public class UserAdminService {
     public UserResponseDto setRoleAdmin(Long userId) {
         User currentUser = getCurrentUser();
         if (!isUserAdmin(currentUser)) {
-            throw new ApiException(ErrorCode.UNAUTHORIZED);
+            throw new ApiException(ErrorCode.ACCESS_DENIED);
         }
 
         User user = userRepository.findByUserId(userId);

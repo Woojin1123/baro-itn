@@ -1,6 +1,8 @@
 package com.example.baro_itn.domain.user.repository;
 
+import com.example.baro_itn.common.enums.ErrorCode;
 import com.example.baro_itn.common.enums.RoleType;
+import com.example.baro_itn.common.exception.ApiException;
 import com.example.baro_itn.domain.user.entity.User;
 import com.example.baro_itn.domain.user.enums.UserRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,6 +43,9 @@ public class UserRepository {
     }
 
     public User findByUsername(String username) {
+        if(!isExists(username)){
+            throw new ApiException(ErrorCode.USER_NOT_FOUND);
+        }
         return users.get(username);
     }
 
