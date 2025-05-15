@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
-    @Operation(summary = "로그인", description = "로그인 API")
+    @Operation(summary = "로그인", description = "로그인 API. 최초 admin 계정은 username : admin 비밀번호 : admin")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(
                     schema = @Schema(implementation = LoginRequestDto.class),
