@@ -1,6 +1,7 @@
 package com.example.baro_itn.common.utils;
 
 import com.example.baro_itn.common.enums.ErrorCode;
+import com.example.baro_itn.common.enums.RoleType;
 import com.example.baro_itn.common.exception.ApiException;
 import com.example.baro_itn.domain.user.enums.UserRole;
 import io.jsonwebtoken.Claims;
@@ -14,10 +15,7 @@ import org.springframework.util.StringUtils;
 
 import java.rmi.ServerException;
 import java.security.Key;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,10 +34,8 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public String createToken(Long userId, String username, List<UserRole> userRoles, String nickname) {
+    public String createToken(Long userId, String username, Map<RoleType,UserRole> roles, String nickname) {
         Date date = new Date();
-
-        List<String> roles = userRoles.stream().map(Enum::name).toList();
 
         return Jwts.builder()
                 .setSubject(userId.toString())

@@ -6,7 +6,7 @@ import com.example.baro_itn.common.utils.JwtUtil;
 import com.example.baro_itn.domain.auth.dto.request.LoginRequestDto;
 import com.example.baro_itn.domain.auth.dto.request.SignupRequestDto;
 import com.example.baro_itn.domain.auth.dto.response.LoginResponseDto;
-import com.example.baro_itn.domain.auth.dto.response.SignupResponseDto;
+import com.example.baro_itn.domain.user.dto.UserResponseDto;
 import com.example.baro_itn.domain.user.entity.User;
 import com.example.baro_itn.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class AuthService {
         return new LoginResponseDto(token);
     }
 
-    public SignupResponseDto signup(SignupRequestDto signupRequestDto) {
+    public UserResponseDto signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
 
         if (userRepository.isExists(username)) {
@@ -48,6 +48,6 @@ public class AuthService {
                 passwordEncoder.encode(signupRequestDto.getPassword()),
                 signupRequestDto.getNickname());
 
-        return SignupResponseDto.from(saveUser);
+        return UserResponseDto.from(saveUser);
     }
 }

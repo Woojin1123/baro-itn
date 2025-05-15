@@ -1,22 +1,23 @@
-package com.example.baro_itn.domain.auth.dto.response;
+package com.example.baro_itn.domain.user.dto;
 
+import com.example.baro_itn.common.enums.RoleType;
 import com.example.baro_itn.domain.user.entity.User;
 import com.example.baro_itn.domain.user.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public class SignupResponseDto {
+public class UserResponseDto {
     private Long userId;
     private String username;
     private String nickname;
-    private List<UserRole> role;
+    private Map<RoleType,UserRole> roles;
 
-    public static SignupResponseDto from(User user) {
-        return new SignupResponseDto(
+    public static UserResponseDto from(User user) {
+        return new UserResponseDto(
                 user.getId(),
                 user.getUsername(),
                 user.getNickname(),

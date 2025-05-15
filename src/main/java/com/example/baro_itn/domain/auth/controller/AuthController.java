@@ -4,7 +4,7 @@ import com.example.baro_itn.common.payload.ApiResponse;
 import com.example.baro_itn.domain.auth.dto.request.LoginRequestDto;
 import com.example.baro_itn.domain.auth.dto.request.SignupRequestDto;
 import com.example.baro_itn.domain.auth.dto.response.LoginResponseDto;
-import com.example.baro_itn.domain.auth.dto.response.SignupResponseDto;
+import com.example.baro_itn.domain.user.dto.UserResponseDto;
 import com.example.baro_itn.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse<SignupResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto) {
-        SignupResponseDto response = authService.signup(signupRequestDto);
+    public ResponseEntity<ApiResponse<UserResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto) {
+        UserResponseDto response = authService.signup(signupRequestDto);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }
