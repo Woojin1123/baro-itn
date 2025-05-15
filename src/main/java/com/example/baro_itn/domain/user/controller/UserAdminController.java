@@ -6,6 +6,7 @@ import com.example.baro_itn.domain.user.service.UserAdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserAdminController {
     private final UserAdminService userAdminService;
 
-    @Operation(summary = "유저 권한을 관리자(Admin)로 변경", description = "특정 유저의 권한을 ADMIN으로 변경하는 API")
+    @Operation(
+            summary = "유저 권한을 관리자(Admin)로 변경",
+            description = "특정 유저의 권한을 ADMIN으로 변경하는 API 로그인 후 발행되는 Bearer Token 필요",
+            security = @SecurityRequirement(name = "BearerAuth"))
     @io.swagger.v3.oas.annotations.responses.ApiResponse(
             responseCode = "200",
             description = "권한 변경 성공",
@@ -31,7 +35,7 @@ public class UserAdminController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = """
             {
               "status": "SUCCESS",
-              "data": {
+              "data": { 
                 "userId": 1,
                 "username": "김우진",
                 "nickname": "만두",
@@ -45,7 +49,7 @@ public class UserAdminController {
     )
     @PatchMapping("/{userId}/roles")
     public ResponseEntity<ApiResponse<UserResponseDto>> setRoleAdmin(@PathVariable Long userId) {
-        UserResponseDto userResponseDto = userAdminService.setRoleAdmin(userId);
+            UserResponseDto userResponseDto = userAdminService.setRoleAdmin(userId);
         return ResponseEntity.ok(ApiResponse.success(userResponseDto));
     }
 }

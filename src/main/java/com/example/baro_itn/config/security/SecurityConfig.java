@@ -38,7 +38,7 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/admin/users/*/roles").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH,"/api/v1/admin/users/*/roles").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

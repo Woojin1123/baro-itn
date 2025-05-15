@@ -75,7 +75,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                filterChain.doFilter(request, response);
             } catch (SecurityException | MalformedJwtException e) {
                 log.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.", e);
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "유효하지 않는 JWT 서명입니다.");
@@ -90,6 +89,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "유효하지 않는 JWT 토큰입니다.");
             }
         }
+        filterChain.doFilter(request, response);
     }
 
     private boolean isPublicPath(String path) {
