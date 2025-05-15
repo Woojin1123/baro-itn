@@ -71,10 +71,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UserRole userRole = roles.get(RoleType.USER);
 
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(username, null, Collections.singletonList(new SimpleGrantedAuthority(userRole.toString())));
+                        new UsernamePasswordAuthenticationToken(username, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userRole.name())));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
             } catch (SecurityException | MalformedJwtException e) {
                 log.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.", e);
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "유효하지 않는 JWT 서명입니다.");
